@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+        
+{% block content %}
+    {% if posts is not None %}
+        {% for post in posts %}
+            <div class="post">
+                <p class="date">公開日: {{ post.published_date }}</p>
+                <p class="author">投稿者: {{ post.author }}</p>
+                <h2 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                <p class="text">{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>記事を投稿してみよう！</p>
+    {% endif %}
+{% endblock %}

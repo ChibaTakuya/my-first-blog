@@ -3,11 +3,10 @@
         {% block content %}    
             {% for post in posts %}
                 <div class="post">
-                    <div class="date">
-                        <p>published: {{ post.published_date }}</p>
-                    </div>
-                    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-                    <p>{{ post.text|linebreaksbr }}</p>
+                    <p class="date">公開日: {{ post.published_date }}</p>
+                    <p class="author">投稿者: {{ post.author }}</p>
+                    <h2 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|truncatechars_html:50 }}</a></h2>
+                    <p class="text">{{ post.text|linebreaksbr|truncatechars_html:20 }}</p>
                 </div>
             {% endfor %}
         {% endblock %}

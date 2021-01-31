@@ -1,16 +1,16 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+    {% if LoginUser == author %}
+        <a href="{% url 'post_edit' pk=post.pk %}" class="edit">編集</a>
+        <a href="{% url 'post_delete' pk=post.pk %}" class="delete">削除</a>
+    {% endif %}
     <div class="post">
         {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }}
-            </div>
+            <p class="date">公開日: {{ post.published_date }}</p>
         {% endif %}
-        {% if user.is_authenticated %}
-     <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-{% endif %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p class="author">投稿者: {{ post.author }}</p>
+        <h2 class="title">{{ post.title }}</h2>
+        <p class="text">{{ post.text|linebreaksbr }}</p>
     </div>
 {% endblock %}
